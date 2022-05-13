@@ -48,14 +48,38 @@ public class CoffeeOrderServiceImpl implements CoffeeOrderService {
 
         Integer id = coffeeOrder.getId();
 
-        if (id != null && isExist(id))
+        /*
+        Я знаю, что есть метод isExistById, но я нашел на StackOverFlow сравнение
+        isExistById и findById. На удивление производительность выше у второго.
+         */
+        if (id != null && repository.findById(id).isPresent())
             throw new CoffeeException("Заказ с таким id уже существует.");
 
+        /*
+        Получаю ту сущность кофе, что реально находится в базе данных.
+         */
         Coffee coffee = coffeeService.getCoffee(coffeeOrder.getCoffee().getId());
 
         Integer idCoffeeMachine = coffeeOrder.getCoffeeMachine().getId();
+
+        /*
+        Данным вызовом мы обновляем запасы кофемашины и уменьшаем счетчик доступных операций
+        по приготовлению кофе.
+         */
         CoffeeMachine coffeeMachine = coffeeMachineService.cookCoffee(idCoffeeMachine, coffee);
 
+        /*
+        Я хотел ограничить возможность обновления сущностей кофе и кофемашины
+        через добавления записи об их использовании, поэтому по сути из получаемого
+        по сети пакета я беру только их id.
+        У Вас может появиться два вопроса:
+        1) почему тогда просто эти поля не сделать примитивами?
+        Ответ: примитивы мне не подходят, потому что я хочу отправлять документ с данными о кофе и
+        о текущем остатке в кофемашине. DTO я создавать не хочу ради пары полей.
+        2) Почему не сделать join-table в сущности coffee или coffee_machine
+        Ответ: я хочу показывать время приготовления каждой конкретной чашки кофе.
+
+         */
         coffeeOrder.setCoffee(coffee);
         coffeeOrder.setCoffeeMachine(coffeeMachine);
 
