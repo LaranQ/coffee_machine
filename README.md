@@ -15,7 +15,9 @@
 - производить операцию по приготовлению кофе.
 
 Логгер находится по адресу: /coffee_machine/target/logging/logging.log
+
 SQL-запросы на создание таблиц находятся по адресу: /coffee_machine/src/main/resources/coffee_machine.sql
+
 Ссылка на Swagger UI: /api/swagger-ui/
 
 ВАЖНО: в файле /coffee_machine/src/main/resources/application.properties изменены логин и пароль от СУБД. Подставьте свои.
