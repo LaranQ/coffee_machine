@@ -18,4 +18,4 @@
 
 Ссылка на Swagger UI: /api/swagger-ui/
 
-ВАЖНО: в файле /coffee_machine/src/main/resources/application.properties изменены логин и пароль об СУБД. Подставьте свои.
+ВАЖНО: в файле /coffee_machine/src/main/resources/application.properties изменены логин и пароль от СУБД. Подставьте свои.
