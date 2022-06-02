@@ -7,6 +7,8 @@ import com.vkhalec.coffee_machine.entity.CoffeeOrder;
 import com.vkhalec.coffee_machine.exception_handling.CoffeeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -44,6 +46,7 @@ public class CoffeeOrderServiceImpl implements CoffeeOrderService {
     }
 
     @Override
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public CoffeeOrder saveCoffeeOrder(CoffeeOrder coffeeOrder){
 
         Integer id = coffeeOrder.getId();
@@ -75,7 +78,7 @@ public class CoffeeOrderServiceImpl implements CoffeeOrderService {
         У Вас может появиться два вопроса:
         1) почему тогда просто эти поля не сделать примитивами?
         Ответ: примитивы мне не подходят, потому что я хочу отправлять документ с данными о кофе и
-        о текущем остатке в кофемашине. DTO я создавать не хочу ради пары полей.
+        о текущем остатке кофемашины. DTO я создавать не хочу ради пары полей.
         2) Почему не сделать join-table в сущности coffee или coffee_machine
         Ответ: я хочу показывать время приготовления каждой конкретной чашки кофе.
 

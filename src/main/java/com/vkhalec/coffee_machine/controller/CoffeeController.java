@@ -32,7 +32,7 @@ public class CoffeeController {
         return service.getCoffee(id);
     }
 
-    @ApiOperation(value = "Получить всех сущностей coffee", httpMethod = "GET", notes = "Получение сведенией о все сущностях в таблице coffee через сервисный класс")
+    @ApiOperation(value = "Получить всех сущностей coffee", httpMethod = "GET", notes = "Получение сведений о все сущностях в таблице coffee через сервисный класс")
     @ApiResponse(code = 200, message = "Вернет все сущности coffee", response = List.class)
     @GetMapping
     public List<Coffee> getAllCoffee() {
