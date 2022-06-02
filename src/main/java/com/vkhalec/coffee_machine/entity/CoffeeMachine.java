@@ -42,6 +42,6 @@ public class CoffeeMachine {
 
     @ApiModelProperty(notes = "Количество кофе, которое можно приготовить до необходимости почистить кофемашину.")
     @Setter
-    @Column(name = "count_before_dirty", nullable = false, insertable = false)
+    @Column(name = "count_before_dirty")
     Integer countBeforeDirty = 5;
 }

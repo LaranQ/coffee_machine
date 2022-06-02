@@ -35,6 +35,7 @@ public class CoffeeMachineServiceImpl implements CoffeeMachineService {
 
     @Override
     public CoffeeMachine saveCoffeeMachine(CoffeeMachine coffeeMachine) {
+
         return repository.save(coffeeMachine);
     }
 
