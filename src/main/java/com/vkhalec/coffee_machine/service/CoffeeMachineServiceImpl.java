@@ -6,6 +6,8 @@ import com.vkhalec.coffee_machine.entity.CoffeeMachine;
 import com.vkhalec.coffee_machine.exception_handling.CoffeeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,6 +39,7 @@ public class CoffeeMachineServiceImpl implements CoffeeMachineService {
     }
 
     @Override
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public CoffeeMachine replaceCoffeeMachine(CoffeeMachine coffeeMachine) {
 
         Integer id = coffeeMachine.getId();
@@ -55,19 +58,18 @@ public class CoffeeMachineServiceImpl implements CoffeeMachineService {
 
         CoffeeMachine coffeeMachine = getCoffeeMachine(idCoffeeMachine.getId());
 
-        synchronized (coffeeMachine) {
             coffeeMachine.setCountBeforeDirty(5);
             repository.save(coffeeMachine);
-        }
+
         return coffeeMachine;
     }
 
     @Override
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public CoffeeMachine cookCoffee(Integer idCoffeeMachine, Coffee coffee) {
 
         CoffeeMachine machine = getCoffeeMachine(idCoffeeMachine);
 
-        synchronized (machine) {
             int timesToClear = machine.getCountBeforeDirty();
 
             if (timesToClear < 1)
@@ -98,6 +100,5 @@ public class CoffeeMachineServiceImpl implements CoffeeMachineService {
 
             repository.save(machine);
             return machine;
-        }
     }
 }

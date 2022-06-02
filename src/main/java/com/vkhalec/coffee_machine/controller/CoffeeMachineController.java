@@ -31,7 +31,7 @@ public class CoffeeMachineController {
     }
 
     @ApiOperation(value = "Получить всех сущностей coffee_machine", httpMethod = "GET",
-            notes = "Получение сведенией о все сущностях в таблице coffee_machine через сервисный класс", response = List.class)
+            notes = "Получение сведений о все сущностях в таблице coffee_machine через сервисный класс", response = List.class)
     @ApiResponse(code = 200, message = "Вернет все сущности coffee_machine", response = List.class)
     @GetMapping
     public List<CoffeeMachine> getAllCoffeeMachine() {
@@ -39,7 +39,7 @@ public class CoffeeMachineController {
     }
 
     @ApiOperation(value = "Добавить сущность coffeeMachine в базу данных", httpMethod = "POST",
-            notes = "Добавление сущности возможно только если с таким id не сущесвует. " +
+            notes = "Добавление сущности возможно только если с таким id не существует. " +
                     "Все null поля будут заменены на default.",
             response = CoffeeMachine.class)
     @ApiImplicitParam(name = "coffeeMachine", value = "coffeeMachine")

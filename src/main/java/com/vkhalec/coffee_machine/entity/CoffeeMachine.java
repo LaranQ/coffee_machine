@@ -1,6 +1,5 @@
 package com.vkhalec.coffee_machine.entity;
 
-import com.vkhalec.coffee_machine.exception_handling.CoffeeException;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;

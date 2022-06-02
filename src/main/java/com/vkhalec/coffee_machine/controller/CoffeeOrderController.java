@@ -31,7 +31,7 @@ public class CoffeeOrderController {
     }
 
     @ApiOperation(value = "Получить всех сущностей coffee_order", httpMethod = "GET",
-            notes = "Получение сведенией о все сущностях в таблице coffee_order через сервисный класс", response = List.class)
+            notes = "Получение сведений о все сущностях в таблице coffee_order через сервисный класс", response = List.class)
     @ApiResponse(code = 200, message = "Вернет все сущности coffee_order", response = List.class)
     @GetMapping
     public List<CoffeeOrder> getAllCoffeeOrders() {
@@ -41,7 +41,7 @@ public class CoffeeOrderController {
     @ApiOperation(value = "Абстрактное действие по приготовлению coffee в конкретной coffeeMachine", httpMethod = "POST",
             notes = "Фактически в таблицу coffee_order добавляется запись о том на какой машине какое кофе было приготовлено." +
                     "Операция возможна только если сущности coffee и coffee_machine существуют." +
-                    "Если закончатся необходимые ингридиенты, то будет возвращено сообщение об ошибке с указанием каких " +
+                    "Если закончатся необходимые ингредиенты, то будет возвращено сообщение об ошибке с указанием каких " +
                     "ингредиентов не хватает.",
             response = CoffeeOrder.class)
     @ApiImplicitParam(name = "CoffeeOrder", value = "CoffeeOrder")
